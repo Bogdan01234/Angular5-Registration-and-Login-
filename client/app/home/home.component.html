@@ -1,0 +1,37 @@
+﻿<div>
+    <h1>All registered users:</h1>
+    <button type="button" class="btn btn-danger" [disabled]= "!disabled"  (click)= " deleteUser()">Delete</button>
+    <button type="button" class="btn btn-warning" [disabled]="!disabled" (click)= " blocking()">Blocking</button>
+    <button type="button" class="btn btn-success" [disabled]="!disabled" (click)= " unblock()">Unblock</button>
+    <button type="button" class="btn btn-success" >Rooms</button>
+
+    <table class="table">
+         <thead>                     
+            <tr> 
+                <td>                          
+                    <input type="checkbox" [(ngModel)]="checked" #checkboxAll (change)="checkAll(checkboxAll.checked)"  [(ngModel)]="disabled"> 
+                </td>                        
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Blocking</th>
+            </tr>
+        </thead>
+                <tbody>
+                    <tr *ngFor="let user of users; let i = index">
+                        <td> 
+                            <input type="checkbox" value="{{user._id}}" [ngModel]="checked" #checkbox (change)="check(checkbox, checkbox.checked)"   [(ngModel)]="disabled">
+                        </td>  
+                        <th scope="row">{{i + 1}}</th>
+                        <!-- <input type="checkbox" [formControlName]="i"> {{users1[i]._id}} -->
+                        <td>{{user.username}}</td>                
+                        <td>({{user.email}})</td>  
+                        <td>({{user.activated}})</td>                         
+                    </tr>
+                </tbody>
+    </table>
+    <p><a [routerLink]="['/login']">Logout</a></p>
+   
+</div>
+
+<!-- - <a (click)="deleteUser(user._id)">Delete</a> -->
